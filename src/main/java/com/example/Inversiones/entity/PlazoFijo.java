@@ -19,7 +19,7 @@ public class PlazoFijo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPlazoFijo;
-    private Cuenta cuenta;
+    private Integer idCuenta;
     private Double monto;
     private Integer plazoDias;
     private String usuario;
