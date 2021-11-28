@@ -1,5 +1,6 @@
 package com.example.Inversiones.config;
 
+import com.example.Inversiones.exception.ExceptionNotFound;
 import com.example.Inversiones.exception.Exceptions;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,4 +20,10 @@ public class StatusExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
+    @ExceptionHandler({ExceptionNotFound.class})
+    protected ResponseEntity<Object> ExceptionNotFound(
+            Exception ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getCause().getMessage(),
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
 }

@@ -21,8 +21,8 @@ public class TasasConfig {
 
     @Override
     public String toString() {
-        return  "Monto mayor a 10000= " + tasa10 +
-                "\nMonto mayor a 50000= " + tasa50 +
-                "\nMonto mayor a 100000= " + tasa100;
+        return  "Monto mayor a 10000= " + tasa10 *100+"%"+
+                "\nMonto mayor a 50000= " + tasa50 *100+"%"+
+                "\nMonto mayor a 100000= " + tasa100*100+"%";
     }
 }
