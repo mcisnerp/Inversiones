@@ -39,7 +39,8 @@ public class PlazoFijoService {
             plazoFijo.setTasa(tasasConfig.getTasa10());
         }
         actualizarRetirarCuenta(cuenta, plazoFijo.getMonto());
-        plazoFijo.setIdCuenta(cuenta.getIdCuenta());
+        plazoFijo.setNumeroCuenta(cuenta.getNumeroCuenta());
+        plazoFijo.setUsuario(cuenta.getUsuario());
         plazoFijo.setIntereses(plazoFijo.getMonto() * plazoFijo.getTasa());
         plazoFijo.setMontoTotal(plazoFijo.getMonto() + plazoFijo.getIntereses());
         return plazoFijoRepository.save(plazoFijo);
@@ -50,15 +51,15 @@ public class PlazoFijoService {
     }
 
     public List<PlazoFijo> listadoPlazoFijo(Integer numeroCuenta) {
-        Cuenta cuenta = buscarCuenta(numeroCuenta);
-        System.out.println(cuenta.getIdCuenta());
-        return plazoFijoRepository.findAllPlazoFijoByIdCuenta(cuenta.getIdCuenta());
+        //Cuenta cuenta = buscarCuenta(numeroCuenta);
+        //System.out.println(cuenta.getIdCuenta());
+        return plazoFijoRepository.findAllPlazoFijoByNumeroCuenta(numeroCuenta);
     }
 
     public PlazoFijo cancelarPlazoFijo(PlazoFijo plazoFijo) {
         List<Cuenta> cuentas = getCuentas();
         for (Cuenta c : cuentas) {
-            if (c.getIdCuenta().equals(plazoFijo.getIdCuenta())) {
+            if (c.getNumeroCuenta().equals(plazoFijo.getNumeroCuenta())) {
                 Double rembolso = plazoFijo.getMonto() - (plazoFijo.getMonto() * 0.02);
                 actualizarDepositarCuenta(c, rembolso);
                 plazoFijo.setStatus("Cancelado");
